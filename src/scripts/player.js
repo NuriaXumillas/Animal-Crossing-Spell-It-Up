@@ -62,6 +62,7 @@ class Player {
             this.isJumping = true; 
         }
     }
+    
     onKeyDown(code) {
         switch (code) {
           case KEY_UP:
@@ -74,7 +75,7 @@ class Player {
             this.vx = -5;
             break;
         }
-      }
+    }
 
     onKeyUp(code) {
         switch (code) {
@@ -83,9 +84,14 @@ class Player {
             this.vx = 0;
             break;
         }
-      }
+    }
 
-
+    collides(el) {
+        const colX = el.x <= this.x + this.w && el.x + el.w >= this.x;
+        const colY = el.y <= this.y + this.h && el.y + el.h >= this.y;
+    
+        return colX && colY;
+    }
  
     
 }
