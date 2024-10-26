@@ -2,8 +2,8 @@ class Player {
     constructor(ctx) {
         this.ctx = ctx;
 
-        this.w = 100;
-        this.h = 100;
+        this.w = 50;
+        this.h = 50;
 
         this.x = (this.ctx.canvas.width - this.w) / 2; 
         this.y = this.ctx.canvas.height - this.h ; 
@@ -62,7 +62,7 @@ class Player {
             this.isJumping = true; 
         }
     }
-    
+
     onKeyDown(code) {
         switch (code) {
           case KEY_UP:
@@ -92,6 +92,6 @@ class Player {
     
         return colX && colY;
     }
- 
-    
+
+
 }

@@ -1,23 +1,23 @@
 class Letter {
-    constructor(ctx) {
+  constructor(ctx, char, isTarget) {
       this.ctx = ctx;
-  
+      this.char = char;
+      this.isTarget = isTarget;
+
       this.w = 50;
       this.h = 75;
-  
-      this.x = this.ctx.canvas.width - this.w - 20;
-      this.y = 730;
-      this.vx = -3;
-  
-      // this.img = new Image();
-      // this.img.src = "/assets/images/enemy.jpeg";
-    }
-  
-    draw() {
-      // this.ctx.drawImage(this.img, this.x, this.y, this.w, this.h);
-    }
-  
-    move() {
-      this.x += this.vx;
-    }
+      this.x = this.ctx.canvas.width;
+      this.y = 400
+      this.vx = -5;
   }
+
+  draw() {
+      this.ctx.font = "60px Arial";
+      this.ctx.fillStyle = "black";
+      this.ctx.fillText(this.char, this.x, this.y);
+  }
+
+  move() {
+      this.x += this.vx;
+  }
+}
