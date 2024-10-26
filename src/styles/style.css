@@ -1,0 +1,49 @@
+/* Estilos globales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #343434; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden; 
+  }
+  
+  h1 {
+    text-align: center;        
+    color: #ffffff;
+    font-size: 4em;
+    margin-bottom: 40px;
+    font-family: 'Arial', sans-serif;
+  }
+  
+
+  #gameCanvas {
+    background-color: #ffffff; /* Un color de fondo para el canvas */
+  }
+
+
+#start {
+    background-color: white; /* Fondo blanco */
+    color: black; /* Letras negras */
+    padding: 10px 20px; /* Espaciado interno */
+    margin-top: 40px;
+    border: none;
+    font-size: 24px; /* Tamaño de la fuente */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    border-radius: 100px; /* Bordes redondeados */
+    transition: background-color 0.3s, color 0.3s; /* Transición suave */
+}
+
+#start:hover {
+    background-color: black; /* Fondo negro al pasar el cursor */
+    color: white; /* Letras blancas al pasar el cursor */
+}
