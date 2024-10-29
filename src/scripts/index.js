@@ -4,15 +4,24 @@ const ctx = canvas.getContext("2d");
 const game = new Game(ctx);
 game.setListeners(); 
 
-const button = document.getElementById("start");
+const buttonStart = document.getElementById("start");
 
-button.addEventListener("click", () => {
+buttonStart.addEventListener("click", () => {
     if (game.started === false) {
         game.start();
-        button.innerText="REINICIAR"
+        buttonStart.innerText="REINICIAR"
         
     } else {
-        button.innerText="START"
+        buttonStart.innerText="START"
         game.pause();
     }
 });
+
+const buttonplayAgain = document.querySelectorAll(".playAgain");
+
+    buttonplayAgain.forEach(button => {
+        button.addEventListener("click", () => {
+        location.reload();
+        });
+    })
+    

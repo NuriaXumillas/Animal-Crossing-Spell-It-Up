@@ -27,7 +27,7 @@ class Player {
         this.x += this.vx;
         this.y += this.vy;
 
-       // abajo
+       // abajo colisión
         if (this.y + this.h >= this.ctx.canvas.height) {
             this.vy = 0;
             this.y = this.ctx.canvas.height - this.h ; 
@@ -69,10 +69,10 @@ class Player {
             this.jump();
             break;
           case KEY_RIGHT:
-            this.vx = 5;
+            this.vx = 10; // Velocidad derecha
             break;
           case KEY_LEFT:
-            this.vx = -5;
+            this.vx = -10; // Velocidad izquierda
             break;
         }
     }

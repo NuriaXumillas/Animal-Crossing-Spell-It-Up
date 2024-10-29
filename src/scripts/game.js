@@ -7,8 +7,8 @@
             this.interval = null;
             this.started = false;
             this.lives = 3;
-            this.targetWordSpanish = "SILLA"; // Traducción en español de la palabra objetivo
-            this.targetWord = "CHAIR"; // Palabra objetivo
+            this.targetWordSpanish = "SILLA"; 
+            this.targetWord = "CHAIR"; 
             this.capturedLetters = ""; // Letras capturadas correctamente
             this.nextLetterIndex = 0; // Índice de la siguiente letra esperada
             this.letterSpawnCounter = 0; // Contador para controlar la frecuencia de aparición
@@ -64,8 +64,8 @@
 
                     // Verificar si ha completado la palabra
                     if (this.capturedLetters === this.targetWord) {
-                        alert("¡Ganaste!");
-                        this.gameOver();
+                        this.showVictory();
+                        this.pause();
                     }
                 } else {
                     // Letra incorrecta, pierde una vida
@@ -96,9 +96,15 @@
         this.ctx.fillText("Vidas: " + this.lives, 10, 80);
     }
 
+    
+    showVictory() {
+        this.pause();
+        document.getElementById("victoryScreen").classList.remove("hidden");
+    }
+
     gameOver() {
         this.pause();
-        alert("Game Over!");
+        document.getElementById("gameOverScreen").classList.remove("hidden");
     }
 
     pause() {

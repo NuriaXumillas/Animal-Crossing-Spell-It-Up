@@ -31,7 +31,7 @@
   }
 
 
-#start {
+button {
     background-color: white; /* Fondo blanco */
     color: black; /* Letras negras */
     padding: 10px 20px; /* Espaciado interno */
@@ -43,7 +43,30 @@
     transition: background-color 0.3s, color 0.3s; /* Transición suave */
 }
 
-#start:hover {
+button:hover {
     background-color: black; /* Fondo negro al pasar el cursor */
     color: white; /* Letras blancas al pasar el cursor */
+}
+
+/* Pantalla de Victoria */
+#victoryScreen, #gameOverScreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  z-index: 2;
+}
+
+
+/* Clase para ocultar la pantalla de victoria */
+.hidden {
+  visibility: hidden;
 }
