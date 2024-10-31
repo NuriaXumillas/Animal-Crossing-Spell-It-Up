@@ -7,9 +7,10 @@ game.setListeners();
 const buttonStart = document.getElementById("start");
 
 buttonStart.addEventListener("click", () => {
-    if (game.started === false) {
+   console.log (game.started)
+    if (!game.started) {
         game.start();
-        buttonStart.innerText="REINICIAR"
+        buttonStart.innerText="PAUSE"
         
     } else {
         buttonStart.innerText="START"

@@ -12,34 +12,31 @@
             this.capturedLetters = ""; // Letras capturadas correctamente
             this.nextLetterIndex = 0; // Índice de la siguiente letra esperada
             this.letterSpawnCounter = 0; // Contador para controlar la frecuencia de aparición
-    
-            // Mezclamos letras objetivo 
+            // Mezclamos letras del objetivo
             this.availableLetters = this.targetWord.split("");
+            this.player.y = this.ctx.canvas.height - this.player.h;
+            this.player.vy = 0;
         }
 
     start() {
-        this.player.y = this.ctx.canvas.height - this.player.h;
-        this.player.vy = 0;
-        this.started = true;
-        this.lives = 3;
-        this.capturedLetters = "";
-        this.letters = [];
-        this.nextLetterIndex = 0;
-        this.letterSpawnCounter = 0;
+        if (!this.started) {
 
-        this.interval = setInterval(() => {
-            this.clear();
-            this.move();
-            this.draw();
-            this.checkCollisions();
+            this.started = true
 
-            this.letterSpawnCounter++;
-            if (this.letterSpawnCounter >= 90) {
-                this.addLetter();
-                this.letterSpawnCounter = 0;
-            }
-
-        }, 1000 / 60);
+            this.interval = setInterval(() => {
+                this.clear();
+                this.move();
+                this.draw();
+                this.checkCollisions();
+    
+                this.letterSpawnCounter++;
+                if (this.letterSpawnCounter >= 90) {
+                    this.addLetter();
+                    this.letterSpawnCounter = 0;
+                }
+    
+            }, 1000 / 60);
+        }
     }
 
     addLetter() {
@@ -108,8 +105,10 @@
     }
 
     pause() {
-        this.started = false;
+
         clearInterval(this.interval);
+        this.interval = null
+        this.started = false
     }
 
     move() {
