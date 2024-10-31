@@ -7,16 +7,45 @@
             this.interval = null;
             this.started = false;
             this.lives = 3;
-            this.targetWordSpanish = "SILLA"; 
-            this.targetWord = "CHAIR"; 
+            this.currentDifficulty = 1; // Empezamos en dificultad 1
+            this.completedWords = []; // Palabras completadas en el nivel actual
+            this.setNewWord(); // primera palabra del juego
             this.capturedLetters = ""; // Letras capturadas correctamente
             this.nextLetterIndex = 0; // Índice de la siguiente letra esperada
             this.letterSpawnCounter = 0; // Contador para controlar la frecuencia de aparición
-            // Mezclamos letras del objetivo
-            this.availableLetters = this.targetWord.split("");
+            this.availableLetters = this.targetWord.split(""); // Mezclamos letras del objetivo
             this.player.y = this.ctx.canvas.height - this.player.h;
             this.player.vy = 0;
         }
+        
+
+    setNewWord() {
+        const availableWords = words.filter(word => word.difficulty === this.currentDifficulty && !this.completedWords.includes(word.english));
+        
+        if (availableWords.length === 0) {
+            this.advanceDifficulty(); // Avanza si no hay más palabras en la dificultad actual
+        } else {
+            const wordData = availableWords[Math.floor(Math.random() * availableWords.length)];
+            this.targetWordSpanish = wordData.spanish;
+            this.targetWord = wordData.english;
+            this.availableLetters = this.targetWord.split("");
+            this.capturedLetters = "";
+            this.nextLetterIndex = 0;
+        }
+    }   
+     // Avanzar la dificultad
+
+     advanceDifficulty() {
+        if (this.currentDifficulty < 3) {
+
+            this.currentDifficulty++;
+            this.completedWords = []; // Palabras completadas a 0 
+            this.setNewWord(); // Nueva palabra para la siguiente dificultad
+        
+        } else {
+            this.showVictoryFinal(); // Ganas si completas todas las dificultades
+        }
+    }  
 
     start() {
         if (!this.started) {
@@ -51,27 +80,26 @@
 
     checkCollisions() {
         this.letters.forEach((letter, index) => {
-            if (this.player.collides(letter)) {
-                const expectedChar = this.targetWord[this.nextLetterIndex]; 
-                
-                if (letter.char === expectedChar) {
-                
-                    this.capturedLetters += letter.char;
-                    this.nextLetterIndex++; 
 
-                    // Verificar si ha completado la palabra
+            if (this.player.collides(letter)) {
+
+                const expectedChar = this.targetWord[this.nextLetterIndex];
+
+                if (letter.char === expectedChar) {
+
+                    this.capturedLetters += letter.char; 
+                    this.nextLetterIndex++; // si la letra capturada es la que necesitamos pasamos a la otra
+
                     if (this.capturedLetters === this.targetWord) {
-                        this.showVictory();
-                        this.pause();
+                        this.completedWords.push(this.targetWord); // Marca la palabra como completada
+                        this.setNewWord(); // Configura la siguiente palabra
                     }
                 } else {
-                    // Letra incorrecta, pierde una vida
                     this.lives--;
                     if (this.lives <= 0) {
-                        this.gameOver();
+                        this.gameOver(); // si pierdes todas las vidas game over
                     }
                 }
-                // Eliminar letra del array tras la colisión
                 this.letters.splice(index, 1);
             }
         });
@@ -82,15 +110,11 @@
         this.letters.forEach((e) => e.draw());
         this.player.draw();
 
-         // Mostrar la palabra en español 
-         this.ctx.font = "24px Arial";
-         this.ctx.fillText("Palabra en español: " + this.targetWordSpanish, this.ctx.canvas.width - 300, 50);
- 
-
-        // Letras capturadas y vidas
-        this.ctx.font = "24px Arial";
-        this.ctx.fillText("Palabra: " + this.capturedLetters, 10, 50);
-        this.ctx.fillText("Vidas: " + this.lives, 10, 80);
+        // Palabra, letras capturadas, vidas y dificultad actual
+        document.getElementById("word-to-spell").textContent = "Deletrea: " + this.targetWordSpanish;
+        document.getElementById("captured-letters").textContent = "Palabra: " + this.capturedLetters;
+        document.getElementById("lives-info").textContent = "Vidas: " + this.lives;
+        document.getElementById("difficulty-info").textContent = "Nivel: " + this.currentDifficulty; 
     }
 
     

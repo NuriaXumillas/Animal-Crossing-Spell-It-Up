@@ -36,23 +36,29 @@
     background-color: #ffffff; /* Un color de fondo para el canvas */
   }
 
-
-button {
-    background-color: #97D2FB; 
-    color: white; 
-    padding: 10px 20px; /* Espaciado interno */
-    margin-top: 40px;
+  button {
+    background-color: #97D2FB;
+    color: white;
+    padding: 15px 30px;
+    margin-top: 20px;
     border: none;
-    font-size: 24px; 
+    font-size: 20px;
     font-weight: 800;
-    cursor: pointer; 
-    border-radius: 100px; 
-    transition: background-color 0.3s, color 0.3s;
+    cursor: pointer;
+    border-radius: 50px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, box-shadow 0.3s;
 }
 
 button:hover {
-    background-color: white; 
-    color: #97D2FB; 
+    background-color: white;
+    color: #97D2FB;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: translateY(1px);
 }
 
 /* Pantalla de Victoria */
@@ -93,4 +99,22 @@ button:hover {
 /* Clase para ocultar la pantalla de victoria */
 .hidden {
   visibility: hidden;
+}
+
+
+#game-info {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  color: #FFFFFF;
+  font-family: Arial, sans-serif;
+}
+
+#word-to-spell {
+  font-size: 50px;
+}
+
+#captured-letters, #lives-info, #difficulty-info {
+  font-size: 24px;
+  margin-top: 5px;
 }
