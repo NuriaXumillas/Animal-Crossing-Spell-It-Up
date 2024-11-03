@@ -1,12 +1,14 @@
 class Player {
-    constructor(ctx) {
+    constructor(ctx, x, y, floor) {
         this.ctx = ctx;
 
-        this.w = 50;
-        this.h = 50;
+        this.w = 80;
+        this.h = 80;
 
-        this.x = (this.ctx.canvas.width - this.w) / 2; 
-        this.y = this.ctx.canvas.height - this.h ; 
+        this.x = x;
+        this.y = y;
+
+        this.floor = floor;
         
         this.vx = 0;
         this.vy = 0;
@@ -15,7 +17,11 @@ class Player {
         this.ay = 1; 
 
         this.img = new Image();
-        this.img.src = "../assets/images/player.png";
+        this.img.frames = 3;
+        this.img.frameIndex = 0;
+        this.img.src = "../assets/images/totakeke.png";
+
+        this.tick = 0;
         
         this.isJumping = false; 
     }
@@ -28,9 +34,9 @@ class Player {
         this.y += this.vy;
 
        // abajo colisión
-        if (this.y + this.h >= this.ctx.canvas.height) {
+        if (this.y + this.h >= this.floor) {
             this.vy = 0;
-            this.y = this.ctx.canvas.height - this.h ; 
+            this.y = this.floor - this.h; 
             this.isJumping = false; 
         }
 
@@ -53,12 +59,37 @@ class Player {
     }
 
     draw() {
-        this.ctx.drawImage(this.img, this.x, this.y, this.w, this.h); 
-    }
+        this.ctx.drawImage(   
+            this.img,
+            (this.img.frameIndex / this.img.frames) * this.img.width,
+            0,
+            (1 / this.img.frames) * this.img.width,
+            this.img.height,
+            this.x,
+            this.y,
+            this.w,
+            this.h
+        );
+
+        this.tick++;
+
+        if (this.tick > 10) {
+            this.tick = 0;
+      
+            this.img.frameIndex++;
+            if (this.img.frameIndex > 2) {
+              this.img.frameIndex = 0;
+            }
+          }
+      
+          if (this.isJumping) {
+            this.img.frameIndex = 2;
+          }
+        }
 
     jump() {
         if (!this.isJumping) {
-            this.vy = -20; 
+            this.vy = -18;  //salto
             this.isJumping = true; 
         }
     }

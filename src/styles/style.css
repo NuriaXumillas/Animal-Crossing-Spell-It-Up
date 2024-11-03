@@ -7,33 +7,36 @@
   
   body {
     font-family: 'Arial', sans-serif;
-    background-color: #343434; 
+    background-image: url(../../assets/images/screen-bg.png);
+    background-repeat: no-repeat;
+    background-size: cover;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content:flex-start;
     align-items: center;
     height: 100vh;
     margin: 0;
     overflow: hidden; 
   }
   
- .titol {
-    text-align: center;        
-    color:  #EE6352;
-    font-size: 4em;
-    margin-bottom: 40px;
-    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif
-  }
+ .logo {
+  position: relative;
+  height: 15em;
+  margin-bottom: 15px;
+
+ } 
   
   h1 {
     text-align: center;        
     color:  #ffffff;
     font-size: 4em;
     margin-bottom: 40px;
-    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif
   }
   #gameCanvas {
-    background-color: #ffffff; /* Un color de fondo para el canvas */
+    background-image: url(../../assets/images/pre-game.jpg);
+    border: #ffffff, 5px, solid;
+    
   }
 
   button {
@@ -61,7 +64,7 @@ button:active {
     transform: translateY(1px);
 }
 
-/* Pantalla de Victoria */
+/* Pantalla de Victoria y Game over */
 #victoryScreen {
   position: fixed;
   top: 0;
@@ -96,25 +99,7 @@ button:active {
 }
 
 
-/* Clase para ocultar la pantalla de victoria */
+/* Clase para ocultar la pantalla de victoria y game over */
 .hidden {
   visibility: hidden;
-}
-
-
-#game-info {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  color: #FFFFFF;
-  font-family: Arial, sans-serif;
-}
-
-#word-to-spell {
-  font-size: 50px;
-}
-
-#captured-letters, #lives-info, #difficulty-info {
-  font-size: 24px;
-  margin-top: 5px;
 }

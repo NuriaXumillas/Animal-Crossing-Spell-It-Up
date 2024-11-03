@@ -7,10 +7,10 @@ class Background {
       this.w = this.ctx.canvas.width;
       this.h = this.ctx.canvas.height;
   
-      this.vx = -2;
+      this.vx = -2; //velocidad fondo
   
       this.img = new Image();
-      this.img.src = "/assets/images/game-bg.png";
+      this.img.src = "/assets/images/game-bg.jpg";
     }
   
     draw() {
