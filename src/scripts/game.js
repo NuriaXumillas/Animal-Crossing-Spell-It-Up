@@ -15,11 +15,31 @@
             this.nextLetterIndex = 0; // Índice de la siguiente letra esperada
             this.letterSpawnCounter = 0; // Contador para controlar la frecuencia de aparición
             this.availableLetters = this.targetWord.split(""); // Mezclamos letras del objetivo
+          
             // Corazones
             this.heartImg = new Image();
             this.heartImg.src = "/assets/images/heart.png";
             this.noHeartImg = new Image();
             this.noHeartImg.src = "/assets/images/no-heart.png";
+
+            // Musica
+            this.audio = new Audio("/assets/sounds/music.mp3");
+            this.audio.loop = true;
+            this.audio.volume = 0.05;
+
+            this.victoryAudio = new Audio("/assets/sounds/win.wav");
+            this.victoryAudio.volume = 0.05;
+            this.gameOverAudio = new Audio("/assets/sounds/gameover.wav");
+            this.gameOverAudio.volume = 0.05;
+
+            this.correctLetterAudio = new Audio("/assets/sounds/correct.wav");
+            this.correctLetterAudio.volume = 0.05;
+            this.incorrectLetterAudio = new Audio("/assets/sounds/incorrect.wav");
+            this.incorrectLetterAudio.volume = 0.05;
+
+            this.levelUpAudio = new Audio("/assets/sounds/levelUp.wav");
+            this.levelUpAudio.volume = 0.05;
+    
         }
         
 
@@ -39,12 +59,18 @@
     }  
 
     advanceDifficulty() {
-        const maxDifficulty = 2; // numero de niveles que hay!!!!!!!
+        const maxDifficulty = 3; // numero de niveles que hay
     
         if (this.currentDifficulty < maxDifficulty) {
             this.currentDifficulty++;
+            this.levelUpAudio.play().catch(error => {
+                console.log("Error al reproducir el sonido de subida de nivel:", error);
+            });
+
             this.completedWords = []; 
             this.setNewWord();
+
+        
         } else {
             this.showVictory(); 
         }
@@ -52,25 +78,27 @@
 
     start() {
         if (!this.started) {
+            this.started = true;
 
-            this.started = true
+            // Musica del juego
+            this.audio.play().catch(error => {
+                console.log("Error al reproducir la música:", error);
+            });
 
             this.interval = setInterval(() => {
                 this.clear();
                 this.move();
                 this.draw();
                 this.checkCollisions();
-    
+
                 this.letterSpawnCounter++;
                 if (this.letterSpawnCounter >= 90) {
                     this.addLetter();
                     this.letterSpawnCounter = 0;
                 }
-    
             }, 1000 / 60);
         }
     }
-
 
     addLetter() {
         // Elegimos una sola letra al azar del arreglo combinado
@@ -93,13 +121,21 @@
 
                     this.capturedLetters += letter.char; 
                     this.nextLetterIndex++; // si la letra capturada es la que necesitamos pasamos a la otra
-
+                    this.correctLetterAudio.play().catch(error => {
+                        console.log("Error al reproducir el sonido de letra correcta:", error);
+                    }); // audio correcto
+    
                     if (this.capturedLetters === this.targetWord) {
                         this.completedWords.push(this.targetWord); // Marca la palabra como completada
                         this.setNewWord(); // Configura la siguiente palabra
                     }
                 } else {
                     this.lives--;
+
+                    this.incorrectLetterAudio.play().catch(error => {
+                        console.log("Error al reproducir el sonido de letra incorrecta:", error);
+                    }); // audio incorrecto
+
                     if (this.lives <= 0) {
                         this.gameOver(); // si pierdes todas las vidas game over
                     }
@@ -155,16 +191,23 @@
     
     showVictory() {
         this.pause();
+        this.victoryAudio.play().catch(error => {
+            console.log("Error al reproducir la música de victoria:", error);
+        });
         document.getElementById("victoryScreen").classList.remove("hidden");
     }
 
     gameOver() {
+        this.audio.pause();
+        this.gameOverAudio.play().catch(error => {
+        console.log("Error al reproducir la música de derrota:", error);
+    });
         this.pause();
         document.getElementById("gameOverScreen").classList.remove("hidden");
     }
 
     pause() {
-
+        this.audio.pause();
         clearInterval(this.interval);
         this.interval = null
         this.started = false
