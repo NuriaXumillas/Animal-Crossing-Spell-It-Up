@@ -18,26 +18,26 @@
           
             // Corazones
             this.heartImg = new Image();
-            this.heartImg.src = "/assets/images/heart.png";
+            this.heartImg.src = "../assets/images/heart.png";
             this.noHeartImg = new Image();
-            this.noHeartImg.src = "/assets/images/no-heart.png";
+            this.noHeartImg.src = "../assets/images/no-heart.png";
 
             // Musica
-            this.audio = new Audio("/assets/sounds/music.mp3");
+            this.audio = new Audio("../assets/sounds/music.mp3");
             this.audio.loop = true;
             this.audio.volume = 0.05;
 
-            this.victoryAudio = new Audio("/assets/sounds/win.wav");
+            this.victoryAudio = new Audio("../assets/sounds/win.wav");
             this.victoryAudio.volume = 0.05;
-            this.gameOverAudio = new Audio("/assets/sounds/gameover.wav");
+            this.gameOverAudio = new Audio("../assets/sounds/gameover.wav");
             this.gameOverAudio.volume = 0.05;
 
-            this.correctLetterAudio = new Audio("/assets/sounds/correct.wav");
+            this.correctLetterAudio = new Audio("../assets/sounds/correct.wav");
             this.correctLetterAudio.volume = 0.05;
-            this.incorrectLetterAudio = new Audio("/assets/sounds/incorrect.wav");
+            this.incorrectLetterAudio = new Audio("../assets/sounds/incorrect.wav");
             this.incorrectLetterAudio.volume = 0.05;
 
-            this.levelUpAudio = new Audio("/assets/sounds/levelUp.wav");
+            this.levelUpAudio = new Audio("../assets/sounds/levelUp.wav");
             this.levelUpAudio.volume = 0.05;
     
         }
