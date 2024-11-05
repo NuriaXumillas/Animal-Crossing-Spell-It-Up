@@ -10,7 +10,7 @@ class Background {
       this.vx = -2; //velocidad fondo
   
       this.img = new Image();
-      this.img.src = ".../assets/images/game-bg.jpg";
+      this.img.src = "assets/images/game-bg.jpg";
     }
   
     draw() {

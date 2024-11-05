@@ -19,7 +19,7 @@ class Player {
         this.img = new Image();
         this.img.frames = 3;
         this.img.frameIndex = 0;
-        this.img.src = "../assets/images/totakeke.png";
+        this.img.src = "assets/images/totakeke.png";
 
         this.tick = 0;
         
