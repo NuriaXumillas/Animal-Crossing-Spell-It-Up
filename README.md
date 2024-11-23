@@ -19,11 +19,5 @@ Complete the Word: Once you finish the word, move on to the next level.  <br>
 Beat All Levels: Win by completing all available words across levels.  <br>
 
 
-💻 SETUP
-1. Clone the repository:
- git clone https://github.com/your-username/animal-crossing-spell-it-up.git <br>
-2. Open index.html in a browser to start the game. Use arrow keys to control the player. <br>
-
-
 Enjoy the game! 🐾  <br>
 © Nuria Xumillas
